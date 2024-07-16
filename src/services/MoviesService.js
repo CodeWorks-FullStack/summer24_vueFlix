@@ -11,6 +11,13 @@ const movieApi = axios.create({
 
 
 class MoviesService {
+  async changePage(pageNumber) {
+    const response = await movieApi.get(`discover/movie?page=${pageNumber}`)
+    console.log('📃🎞️📡', response.data);
+    const movies = response.data.results.map(movieData => new Movie(movieData))
+    AppState.movies = movies
+    AppState.currentPage = response.data.page
+  }
 
   async discoverMovies() {
     const response = await movieApi.get('discover/movie')
@@ -18,6 +25,7 @@ class MoviesService {
     const movies = response.data.results.map(movieData => new Movie(movieData))
     console.log('🍿', movies);
     AppState.movies = movies
+    AppState.currentPage = response.data.page
   }
 
 }
