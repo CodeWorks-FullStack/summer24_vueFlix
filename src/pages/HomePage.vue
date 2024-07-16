@@ -5,12 +5,14 @@ import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
 import MovieCard from '../components/MovieCard.vue'
 import DiscoverButtons from '../components/DiscoverButtons.vue'
+import SearchMovieBar from '../components/SearchMovieBar.vue'
 // NOTE pages are responsible for "Getting" the data they want to display
 
 const movies = computed(()=> AppState.movies)
 
 onMounted(()=>{
   discoverMovies()
+  console.log('movies', movies.value);
 })
 
 async function discoverMovies(){
@@ -25,8 +27,11 @@ async function discoverMovies(){
 </script>
 
 <template>
-  <h1 class="text-primary fw-bold text-center">
-    Welcome to 🍿 Vue-Flix 🎞️
+  <h1 class="text-primary fw-bold text-center hero-bg text-white p-4">
+    Search Billions of movies, No TV shows, or actors
+    <div >
+      <SearchMovieBar/>
+    </div>
   </h1>
   <DiscoverButtons/>
   <section class="row g-1">
@@ -54,4 +59,15 @@ async function discoverMovies(){
   <DiscoverButtons/>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.hero-bg{
+  background-image: url(https://image.tmdb.org/t/p/original/dKqa850uvbNSCaQCV4Im1XlzEtQ.jpg);
+  background-size: cover;
+  background-position: center;
+  min-height: 50vh;
+}
+
+.unfiltered{
+  filter: unset;
+}
+</style>
